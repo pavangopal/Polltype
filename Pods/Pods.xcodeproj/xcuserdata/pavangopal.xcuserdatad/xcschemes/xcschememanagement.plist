@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Ably.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>KSCrashAblyFork.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Polltype.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SocketRocket.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>msgpack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>2FE2EB022D7DBF3566D3EC50F1B5C25B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7FD7A2697400360A14B5430FD82B8691</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9402F38A09010FA4AED3473167C23110</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9CC55A5763868350DF4B02E94E6D7B98</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE6F2DE67A1CC567D93C31970AEBBA51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
