@@ -9,17 +9,18 @@
 import Foundation
 import Ably
 
-protocol PolltypeDelegate {
+public protocol PolltypeDelegate {
     func shouldReloadUIForPollId(pollId:Int,updatedPoll:Poll?)
+    
 }
 
 open class Polltype : NSObject{
     
-   open static let shared = Polltype()
+    open static let shared = Polltype()
     
     fileprivate var _api:APIManager?
     
-    var parentView:UIView?
+    public var parentView:UIView?
     
     var polls:[Int:Poll] = [:]
     
@@ -37,6 +38,7 @@ open class Polltype : NSObject{
     
     
     var hostURl : String!
+    var imageCDN : String!
     
     var ablyToken:String?
     
@@ -75,36 +77,80 @@ open class Polltype : NSObject{
         }
     }
     
-    var PollTypeDelegate:PolltypeDelegate?
+    public var PollTypeDelegate:PolltypeDelegate?
     
     private override init(){}
     
-    public func configure(withHostUrl url:String){
+    public func configure(withHostUrl url:String,imageCDN:String){
         
         self.hostURl = url
+        self.imageCDN = imageCDN
+        Polltype.shared.generateAblyToken()
+        
     }
     
     
     
-   public func getPoll(withId id:Int, onSucess:@escaping (Int,Poll?)->(), onError:@escaping (String?)->()){
+    public func getPoll(withId id:Int, onSucess:@escaping (Int,Poll?)->(), onError:@escaping (String?)->()){
         
-        api.fetchPoll(id) {(poll, error) in
-            
-            if let unwrappedError = error{
-                onError(unwrappedError.localizedDescription)
+        if self.polls[id] != nil{
+            DispatchQueue.main.async {
+                onSucess(id, self.polls[id])
             }
-            else{
-                self.pollChannel = self.ablyManager.client.channels.get("polltype-clients:results-\(id)")
-                self.watchPollChange(channel: self.pollChannel)
-                onSucess(id, poll)
+        }else{
+            
+            api.fetchPoll(id) {(poll, error) in
                 
+                if let unwrappedError = error{
+                    onError(unwrappedError.localizedDescription)
+                }
+                else{
+                    DispatchQueue.main.async {
+                        if self.pollChannel == nil && self.ablyToken != nil{
+                            
+                            self.pollChannel = self.ablyManager.client.channels.get("polltype-clients:results-\(id)")
+                            self.watchPollChange(channel: self.pollChannel)
+                        }
+                        
+                        onSucess(id, poll)
+                        
+                    }
+                    
+                }
             }
         }
     }
     
-  //Step 1: Call in viewdidLoad()
+    public func loadPollView(id:Int,view:PolltypeView,onSucess:@escaping (Int,Poll?,PolltypeView?)->(), onError:@escaping (String?)->()){
+        
+        getPoll(withId: id, onSucess: { (pollid, poll) in
+            
+            DispatchQueue.main.async {
+                
+                
+                if self.pollChannel == nil && self.ablyToken != nil{
+                    
+                    //                    self.pollChannel = self.ablyManager.client.channels.get("polltype-clients:results-\(id)")
+                    //                    self.watchPollChange(channel: self.pollChannel)
+                }
+                
+                self.polls[id] = poll
+                
+                onSucess(pollid, poll, view)
+                
+            }
+            
+        }) { (errorMessage) in
+            print(errorMessage)
+        }
+    }
     
-  public  func generateAblyToken(){
+    
+    
+    
+    //Step 1: Call in viewdidLoad()
+    
+    public  func generateAblyToken(){
         
         self.api.fetchAblyToken({[weak self] (token, error) in
             
@@ -162,7 +208,11 @@ open class Polltype : NSObject{
                         }
                         
                         if shouldReload{
-                            weakSelf.PollTypeDelegate?.shouldReloadUIForPollId(pollId: somePoll.id,updatedPoll: somePoll)
+                            
+                            DispatchQueue.main.async {
+                                weakSelf.PollTypeDelegate?.shouldReloadUIForPollId(pollId: somePoll.id,updatedPoll: self?.polls[somePoll.id])
+                            }
+                            
                         }
                     }
                 })
@@ -189,7 +239,7 @@ extension Polltype:PolltypeCellDelegate{
         
     }
     
-    public func didClickOnLogin(_ poll: Poll, cell: PolltypeCell) {
+    public func didClickOnLogin(_ poll: Poll, view: PolltypeView) {
         
     }
     
@@ -201,31 +251,30 @@ extension Polltype:PolltypeCellDelegate{
         
     }
     
-    public func didClickOnVote(_ poll: Poll, opinionIndex: Int, cell: PolltypeCell) {
+    public func didClickOnVote(_ poll: Poll, opinionIndex: Int, view: PolltypeView) {
         print("did enter here")
         
         api.voteIntend(poll.id, opinionID: poll.opinions[opinionIndex].id)
         
         if poll.hasAccount{
             
-            self.vote(poll, opinionIndex: opinionIndex, cell: cell)
+            self.vote(poll, opinionIndex: opinionIndex, cell: view)
         }
         else{
             DispatchQueue.main.async(execute: {
-                self.showWebView(cell)
+                self.showWebView(view)
             })
             
             self.loginCompletion = {
                 self.closeWebview(self.loginWebView!)
-                self.vote(poll, opinionIndex: opinionIndex, cell: cell)
+                self.vote(poll, opinionIndex: opinionIndex, cell: view)
             }
         }
     }
     
-    func vote(_ poll:Poll, opinionIndex:Int, cell: PolltypeCell){
+    func vote(_ poll:Poll, opinionIndex:Int, cell: PolltypeView){
         
         api.vote(poll,storyURL: nil,opinionIndex: opinionIndex) { (polld, error) in
-            
             
             if let _ = error{
                 return
@@ -235,8 +284,10 @@ extension Polltype:PolltypeCellDelegate{
             
             self.polls[(polld?.id)!]?.hasAccount = polld?.hasAccount ?? false
             
+            DispatchQueue.main.async {
+                self.PollTypeDelegate?.shouldReloadUIForPollId(pollId: (polld?.id)!,updatedPoll: polld)
+            }
             
-            self.PollTypeDelegate?.shouldReloadUIForPollId(pollId: (polld?.id)!,updatedPoll: polld)
             
         }
     }
@@ -245,7 +296,7 @@ extension Polltype:PolltypeCellDelegate{
 
 extension Polltype:UIWebViewDelegate{
     
-    public func showWebView(_ cell: PolltypeCell?){
+    public func showWebView(_ cell: PolltypeView?){
         loginWebView!.removeFromSuperview()
         self.parentView?.addSubview(self.loginWebView!)
         self.parentView?.bringSubview(toFront: self.loginWebView!)
@@ -263,7 +314,7 @@ extension Polltype:UIWebViewDelegate{
         closeButton.setTitle("X", for: UIControlState())
         closeButton.setTitleColor(UIColor.lightText, for: .normal)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.addTarget(self, action: #selector(ViewController.closeWebview(_:)), for: .touchUpInside)
+        closeButton.addTarget(self, action: #selector(self.closeWebview(_:)), for: .touchUpInside)
         self.loginWebView?.addSubview(closeButton)
         self.loginWebView?.bringSubview(toFront: closeButton)
         closeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true

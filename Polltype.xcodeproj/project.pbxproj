@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D787E521F0B67D60040A7F0 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D787E511F0B67D60040A7F0 /* Media.xcassets */; };
 		1D9B20A11F066FC30009CAB8 /* Polltype.h in Headers */ = {isa = PBXBuildFile; fileRef = 1D9B209F1F066FC30009CAB8 /* Polltype.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1D9B20A81F0671980009CAB8 /* PolltypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20A71F0671980009CAB8 /* PolltypeCell.swift */; };
 		1D9B20AD1F0673120009CAB8 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20AA1F0673120009CAB8 /* ApiService.swift */; };
 		1D9B20AE1F0673120009CAB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20AB1F0673120009CAB8 /* Constants.swift */; };
 		1D9B20C01F0673190009CAB8 /* AblyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20B11F0673190009CAB8 /* AblyManager.swift */; };
@@ -23,22 +23,52 @@
 		1D9B20CE1F0673190009CAB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20BF1F0673190009CAB8 /* ViewController.swift */; };
 		1D9B20D01F06731F0009CAB8 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20CF1F06731F0009CAB8 /* Poll.swift */; };
 		1D9B20D21F0676460009CAB8 /* Polltype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20D11F0676460009CAB8 /* Polltype.swift */; };
-		1DAD50DE1F0A40380021F55E /* ic_brand_logo_initial_100dp-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAD50DB1F0A40380021F55E /* ic_brand_logo_initial_100dp-1.png */; };
-		1DAD50DF1F0A40380021F55E /* ic_brand_logo_initial_100dp-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAD50DC1F0A40380021F55E /* ic_brand_logo_initial_100dp-2.png */; };
-		1DAD50E01F0A40380021F55E /* ic_brand_logo_initial_100dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAD50DD1F0A40380021F55E /* ic_brand_logo_initial_100dp.png */; };
-		1DAD50E21F0A403F0021F55E /* ic_polltypelogo_blue (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAD50E11F0A403F0021F55E /* ic_polltypelogo_blue (1).png */; };
-		1DAD50E51F0A40450021F55E /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAD50E31F0A40450021F55E /* share.png */; };
-		1DAD50E61F0A40450021F55E /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DAD50E41F0A40450021F55E /* share@2x.png */; };
-		1DE5D96B1F0A3AD4007DBE4F /* PolltypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DE5D96A1F0A3AD4007DBE4F /* PolltypeCell.xib */; };
-		CDB78ABD144D097E3D9A35CC /* Pods_Polltype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419E076FC19C923732E7448B /* Pods_Polltype.framework */; };
+		1DB537011F0A56E9008C026F /* Ably.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB537001F0A56E9008C026F /* Ably.framework */; };
+		1DB537081F0A571C008C026F /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB537071F0A571C008C026F /* SocketRocket.framework */; };
+		1DB5370A1F0A571F008C026F /* msgpack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB537091F0A571F008C026F /* msgpack.framework */; };
+		1DB537211F0A5931008C026F /* Ably.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD359AA1F0A519D007581E8 /* Ably.framework */; };
+		1DB537231F0A5935008C026F /* Ably.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD359AA1F0A519D007581E8 /* Ably.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1DB537261F0A5948008C026F /* KSCrashAblyFork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB537251F0A5948008C026F /* KSCrashAblyFork.framework */; };
+		1DB5372A1F0A594E008C026F /* KSCrashAblyFork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB537251F0A5948008C026F /* KSCrashAblyFork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1DB5372B1F0A5952008C026F /* msgpack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB537271F0A594B008C026F /* msgpack.framework */; };
+		1DB5372C1F0A5952008C026F /* msgpack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1DB537271F0A594B008C026F /* msgpack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1DB5372D1F0A5964008C026F /* SocketRocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2CA91D1F0A5611009F2CDE /* SocketRocket.framework */; };
+		1DB5372F1F0A5967008C026F /* SocketRocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2CA91D1F0A5611009F2CDE /* SocketRocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1DB537311F0A5E19008C026F /* PolltypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB537301F0A5E19008C026F /* PolltypeView.swift */; };
+		1DB537351F0A62DD008C026F /* PolltypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB537341F0A62DD008C026F /* PolltypeCell.swift */; };
+		1DD359B71F0A5240007581E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD359B61F0A5240007581E8 /* AppDelegate.swift */; };
+		1DD359B91F0A5240007581E8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD359B81F0A5240007581E8 /* ViewController.swift */; };
+		1DD359BC1F0A5240007581E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DD359BA1F0A5240007581E8 /* Main.storyboard */; };
+		1DD359BE1F0A5240007581E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DD359BD1F0A5240007581E8 /* Assets.xcassets */; };
+		1DD359C11F0A5240007581E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DD359BF1F0A5240007581E8 /* LaunchScreen.storyboard */; };
+		F2E5093C3C8D0F5783310A77 /* Pods_Polltype.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 419E076FC19C923732E7448B /* Pods_Polltype.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		1DB537241F0A5935008C026F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1DB5372A1F0A594E008C026F /* KSCrashAblyFork.framework in Embed Frameworks */,
+				1DB5372C1F0A5952008C026F /* msgpack.framework in Embed Frameworks */,
+				1DB537231F0A5935008C026F /* Ably.framework in Embed Frameworks */,
+				1DB5372F1F0A5967008C026F /* SocketRocket.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0C4E5BBDC92CB270F6B1DAF5 /* Pods_testt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		174FBCB369BBD860E54DA2C2 /* Pods-Polltype.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Polltype.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Polltype/Pods-Polltype.debug.xcconfig"; sourceTree = "<group>"; };
+		1D2CA91D1F0A5611009F2CDE /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/SocketRocket/SocketRocket.framework"; sourceTree = "<group>"; };
+		1D787E511F0B67D60040A7F0 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		1D9B209C1F066FC30009CAB8 /* Polltype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Polltype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D9B209F1F066FC30009CAB8 /* Polltype.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Polltype.h; sourceTree = "<group>"; };
 		1D9B20A01F066FC30009CAB8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1D9B20A71F0671980009CAB8 /* PolltypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PolltypeCell.swift; path = ../PolltypeCell.swift; sourceTree = "<group>"; };
 		1D9B20AA1F0673120009CAB8 /* ApiService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		1D9B20AB1F0673120009CAB8 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1D9B20B11F0673190009CAB8 /* AblyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AblyManager.swift; path = ../UI/AblyManager.swift; sourceTree = "<group>"; };
@@ -53,14 +83,36 @@
 		1D9B20BF1F0673190009CAB8 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D9B20CF1F06731F0009CAB8 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Poll.swift; path = ../Poll.swift; sourceTree = "<group>"; };
 		1D9B20D11F0676460009CAB8 /* Polltype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Polltype.swift; sourceTree = "<group>"; };
-		1DAD50DB1F0A40380021F55E /* ic_brand_logo_initial_100dp-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_brand_logo_initial_100dp-1.png"; sourceTree = "<group>"; };
-		1DAD50DC1F0A40380021F55E /* ic_brand_logo_initial_100dp-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_brand_logo_initial_100dp-2.png"; sourceTree = "<group>"; };
-		1DAD50DD1F0A40380021F55E /* ic_brand_logo_initial_100dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_brand_logo_initial_100dp.png; sourceTree = "<group>"; };
-		1DAD50E11F0A403F0021F55E /* ic_polltypelogo_blue (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_polltypelogo_blue (1).png"; sourceTree = "<group>"; };
-		1DAD50E31F0A40450021F55E /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
-		1DAD50E41F0A40450021F55E /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
-		1DE5D96A1F0A3AD4007DBE4F /* PolltypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PolltypeCell.xib; sourceTree = "<group>"; };
+		1DB537001F0A56E9008C026F /* Ably.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ably.framework; path = "Pods/../build/Debug-iphoneos/Ably/Ably.framework"; sourceTree = "<group>"; };
+		1DB537071F0A571C008C026F /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphoneos/SocketRocket/SocketRocket.framework"; sourceTree = "<group>"; };
+		1DB537091F0A571F008C026F /* msgpack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = msgpack.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphoneos/msgpack/msgpack.framework"; sourceTree = "<group>"; };
+		1DB537111F0A576B008C026F /* Pods_Polltype.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Polltype.framework; path = "Pods/../build/Debug-iphoneos/Pods_Polltype.framework"; sourceTree = "<group>"; };
+		1DB537151F0A578A008C026F /* KSCrashAblyFork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSCrashAblyFork.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphoneos/KSCrashAblyFork/KSCrashAblyFork.framework"; sourceTree = "<group>"; };
+		1DB537251F0A5948008C026F /* KSCrashAblyFork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSCrashAblyFork.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/KSCrashAblyFork/KSCrashAblyFork.framework"; sourceTree = "<group>"; };
+		1DB537271F0A594B008C026F /* msgpack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = msgpack.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/msgpack/msgpack.framework"; sourceTree = "<group>"; };
+		1DB537301F0A5E19008C026F /* PolltypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolltypeView.swift; sourceTree = "<group>"; };
+		1DB537341F0A62DD008C026F /* PolltypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolltypeCell.swift; sourceTree = "<group>"; };
+		1DD359A61F0A505E007581E8 /* Pods_Polltype.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Polltype.framework; path = "Pods/../build/Debug-iphoneos/Pods_Polltype.framework"; sourceTree = "<group>"; };
+		1DD359A81F0A508C007581E8 /* Ably.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ably.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphoneos/Ably/Ably.framework"; sourceTree = "<group>"; };
+		1DD359AA1F0A519D007581E8 /* Ably.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ably.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/Ably/Ably.framework"; sourceTree = "<group>"; };
+		1DD359B41F0A5240007581E8 /* testt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DD359B61F0A5240007581E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1DD359B81F0A5240007581E8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1DD359BB1F0A5240007581E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1DD359BD1F0A5240007581E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1DD359C01F0A5240007581E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1DD359C21F0A5240007581E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DD359C61F0A542E007581E8 /* KSCrashAblyFork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSCrashAblyFork.framework; path = "Pods/../build/Debug-iphoneos/KSCrashAblyFork-framework/KSCrashAblyFork.framework"; sourceTree = "<group>"; };
+		1DD359CC1F0A544B007581E8 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = "Pods/../build/Debug-iphoneos/SocketRocket-framework/SocketRocket.framework"; sourceTree = "<group>"; };
+		1DD359CE1F0A5468007581E8 /* KSCrashAblyFork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KSCrashAblyFork.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/KSCrashAblyFork-framework/KSCrashAblyFork.framework"; sourceTree = "<group>"; };
+		1DD359CF1F0A5468007581E8 /* libKSCrashAblyFork-library.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libKSCrashAblyFork-library.a"; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/KSCrashAblyFork-library/libKSCrashAblyFork-library.a"; sourceTree = "<group>"; };
+		1DD359D91F0A54D4007581E8 /* Ably.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ably.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/Ably-framework/Ably.framework"; sourceTree = "<group>"; };
+		1DD359DB1F0A54E3007581E8 /* SocketRocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketRocket.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/SocketRocket-framework/SocketRocket.framework"; sourceTree = "<group>"; };
+		1DD359DD1F0A54F6007581E8 /* Pods_Polltype.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Pods_Polltype.framework; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/Pods_Polltype.framework"; sourceTree = "<group>"; };
+		1DD359E01F0A5572007581E8 /* libSocketRocket-library.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libSocketRocket-library.a"; path = "../../../Library/Developer/Xcode/DerivedData/Polltype-fwcxnhikaifaraaauxrstdpiznfy/Build/Products/Debug-iphonesimulator/SocketRocket-library/libSocketRocket-library.a"; sourceTree = "<group>"; };
 		419E076FC19C923732E7448B /* Pods_Polltype.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Polltype.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C2BAD5DCBCB778A79B766DA /* Pods-testt.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testt.release.xcconfig"; path = "Pods/Target Support Files/Pods-testt/Pods-testt.release.xcconfig"; sourceTree = "<group>"; };
+		77740EA48744A2E2C8753C51 /* Pods-testt.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testt.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testt/Pods-testt.debug.xcconfig"; sourceTree = "<group>"; };
 		7F3BDD86FF861D292E555564 /* Pods-Polltype.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Polltype.release.xcconfig"; path = "Pods/Target Support Files/Pods-Polltype/Pods-Polltype.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,7 +121,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDB78ABD144D097E3D9A35CC /* Pods_Polltype.framework in Frameworks */,
+				1DB5370A1F0A571F008C026F /* msgpack.framework in Frameworks */,
+				1DB537081F0A571C008C026F /* SocketRocket.framework in Frameworks */,
+				1DB537011F0A56E9008C026F /* Ably.framework in Frameworks */,
+				F2E5093C3C8D0F5783310A77 /* Pods_Polltype.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DD359B11F0A5240007581E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DB5372D1F0A5964008C026F /* SocketRocket.framework in Frameworks */,
+				1DB537261F0A5948008C026F /* KSCrashAblyFork.framework in Frameworks */,
+				1DB5372B1F0A5952008C026F /* msgpack.framework in Frameworks */,
+				1DB537211F0A5931008C026F /* Ably.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +147,8 @@
 			children = (
 				174FBCB369BBD860E54DA2C2 /* Pods-Polltype.debug.xcconfig */,
 				7F3BDD86FF861D292E555564 /* Pods-Polltype.release.xcconfig */,
+				77740EA48744A2E2C8753C51 /* Pods-testt.debug.xcconfig */,
+				5C2BAD5DCBCB778A79B766DA /* Pods-testt.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -89,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				1D9B209E1F066FC30009CAB8 /* Polltype */,
+				1DD359B51F0A5240007581E8 /* testt */,
 				1D9B209D1F066FC30009CAB8 /* Products */,
 				16E409364073BB8A783BFE35 /* Pods */,
 				7853EE355C458DE883A4F4B6 /* Frameworks */,
@@ -99,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				1D9B209C1F066FC30009CAB8 /* Polltype.framework */,
+				1DD359B41F0A5240007581E8 /* testt.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,16 +177,11 @@
 			isa = PBXGroup;
 			children = (
 				1D9B20D11F0676460009CAB8 /* Polltype.swift */,
-				1DAD50DB1F0A40380021F55E /* ic_brand_logo_initial_100dp-1.png */,
-				1DAD50DC1F0A40380021F55E /* ic_brand_logo_initial_100dp-2.png */,
-				1DAD50DD1F0A40380021F55E /* ic_brand_logo_initial_100dp.png */,
-				1DAD50E11F0A403F0021F55E /* ic_polltypelogo_blue (1).png */,
-				1DAD50E31F0A40450021F55E /* share.png */,
-				1DAD50E41F0A40450021F55E /* share@2x.png */,
 				1D9B20A91F0673120009CAB8 /* API */,
 				1D9B20B01F0673190009CAB8 /* UI */,
 				1D9B209F1F066FC30009CAB8 /* Polltype.h */,
 				1D9B20A01F066FC30009CAB8 /* Info.plist */,
+				1D787E511F0B67D60040A7F0 /* Media.xcassets */,
 			);
 			path = Polltype;
 			sourceTree = "<group>";
@@ -137,7 +202,6 @@
 		1D9B20B01F0673190009CAB8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1DE5D96A1F0A3AD4007DBE4F /* PolltypeCell.xib */,
 				1D9B20BF1F0673190009CAB8 /* ViewController.swift */,
 				1D9B20B41F0673190009CAB8 /* PollTypeThankyou.swift */,
 				1D9B20B51F0673190009CAB8 /* PollTypeThankyou.xib */,
@@ -145,15 +209,49 @@
 				1D9B20B71F0673190009CAB8 /* PoweredByPollTypeView.swift */,
 				1D9B20B81F0673190009CAB8 /* ResizableButton.swift */,
 				1D9B20BC1F0673190009CAB8 /* UIColor + Hex8bitColor.swift */,
-				1D9B20A71F0671980009CAB8 /* PolltypeCell.swift */,
+				1DB537301F0A5E19008C026F /* PolltypeView.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		1DD359B51F0A5240007581E8 /* testt */ = {
+			isa = PBXGroup;
+			children = (
+				1DD359B61F0A5240007581E8 /* AppDelegate.swift */,
+				1DD359B81F0A5240007581E8 /* ViewController.swift */,
+				1DD359BA1F0A5240007581E8 /* Main.storyboard */,
+				1DD359BD1F0A5240007581E8 /* Assets.xcassets */,
+				1DD359BF1F0A5240007581E8 /* LaunchScreen.storyboard */,
+				1DD359C21F0A5240007581E8 /* Info.plist */,
+				1DB537341F0A62DD008C026F /* PolltypeCell.swift */,
+			);
+			path = testt;
 			sourceTree = "<group>";
 		};
 		7853EE355C458DE883A4F4B6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1DB537271F0A594B008C026F /* msgpack.framework */,
+				1DB537251F0A5948008C026F /* KSCrashAblyFork.framework */,
+				1DB537151F0A578A008C026F /* KSCrashAblyFork.framework */,
+				1DB537111F0A576B008C026F /* Pods_Polltype.framework */,
+				1DB537091F0A571F008C026F /* msgpack.framework */,
+				1DB537071F0A571C008C026F /* SocketRocket.framework */,
+				1DB537001F0A56E9008C026F /* Ably.framework */,
+				1D2CA91D1F0A5611009F2CDE /* SocketRocket.framework */,
+				1DD359E01F0A5572007581E8 /* libSocketRocket-library.a */,
+				1DD359DD1F0A54F6007581E8 /* Pods_Polltype.framework */,
+				1DD359DB1F0A54E3007581E8 /* SocketRocket.framework */,
+				1DD359D91F0A54D4007581E8 /* Ably.framework */,
+				1DD359CE1F0A5468007581E8 /* KSCrashAblyFork.framework */,
+				1DD359CF1F0A5468007581E8 /* libKSCrashAblyFork-library.a */,
+				1DD359CC1F0A544B007581E8 /* SocketRocket.framework */,
+				1DD359C61F0A542E007581E8 /* KSCrashAblyFork.framework */,
+				1DD359AA1F0A519D007581E8 /* Ably.framework */,
+				1DD359A81F0A508C007581E8 /* Ably.framework */,
+				1DD359A61F0A505E007581E8 /* Pods_Polltype.framework */,
 				419E076FC19C923732E7448B /* Pods_Polltype.framework */,
+				0C4E5BBDC92CB270F6B1DAF5 /* Pods_testt.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -192,12 +290,34 @@
 			productReference = 1D9B209C1F066FC30009CAB8 /* Polltype.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		1DD359B31F0A5240007581E8 /* testt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DD359C31F0A5240007581E8 /* Build configuration list for PBXNativeTarget "testt" */;
+			buildPhases = (
+				46EFAFBF1E6B065FCF055EB5 /* [CP] Check Pods Manifest.lock */,
+				1DD359B01F0A5240007581E8 /* Sources */,
+				1DD359B11F0A5240007581E8 /* Frameworks */,
+				1DD359B21F0A5240007581E8 /* Resources */,
+				666A487BC167D702CC7694B1 /* [CP] Embed Pods Frameworks */,
+				AD95F3BB22F5F3D2A30C37AD /* [CP] Copy Pods Resources */,
+				1DB537241F0A5935008C026F /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = testt;
+			productName = testt;
+			productReference = 1DD359B41F0A5240007581E8 /* testt.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		1D9B20931F066FC30009CAB8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Pavan Gopal";
 				TargetAttributes = {
@@ -205,6 +325,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = K6F4AGE4B2;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+					1DD359B31F0A5240007581E8 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = K6F4AGE4B2;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -215,6 +340,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 1D9B20921F066FC30009CAB8;
 			productRefGroup = 1D9B209D1F066FC30009CAB8 /* Products */;
@@ -222,6 +348,7 @@
 			projectRoot = "";
 			targets = (
 				1D9B209B1F066FC30009CAB8 /* Polltype */,
+				1DD359B31F0A5240007581E8 /* testt */,
 			);
 		};
 /* End PBXProject section */
@@ -231,15 +358,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D787E521F0B67D60040A7F0 /* Media.xcassets in Resources */,
 				1D9B20C51F0673190009CAB8 /* PoweredByPollType.xib in Resources */,
-				1DAD50E01F0A40380021F55E /* ic_brand_logo_initial_100dp.png in Resources */,
-				1DAD50E61F0A40450021F55E /* share@2x.png in Resources */,
-				1DAD50DF1F0A40380021F55E /* ic_brand_logo_initial_100dp-2.png in Resources */,
-				1DAD50E21F0A403F0021F55E /* ic_polltypelogo_blue (1).png in Resources */,
-				1DE5D96B1F0A3AD4007DBE4F /* PolltypeCell.xib in Resources */,
 				1D9B20C41F0673190009CAB8 /* PollTypeThankyou.xib in Resources */,
-				1DAD50DE1F0A40380021F55E /* ic_brand_logo_initial_100dp-1.png in Resources */,
-				1DAD50E51F0A40450021F55E /* share.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DD359B21F0A5240007581E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DD359C11F0A5240007581E8 /* LaunchScreen.storyboard in Resources */,
+				1DD359BE1F0A5240007581E8 /* Assets.xcassets in Resources */,
+				1DD359BC1F0A5240007581E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +392,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		46EFAFBF1E6B065FCF055EB5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		666A487BC167D702CC7694B1 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testt/Pods-testt-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9C9C2ACE781FF550A1194637 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -276,6 +437,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Polltype/Pods-Polltype-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		AD95F3BB22F5F3D2A30C37AD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-testt/Pods-testt-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -286,9 +462,9 @@
 				1D9B20D01F06731F0009CAB8 /* Poll.swift in Sources */,
 				1D9B20C11F0673190009CAB8 /* AblyParseManager.swift in Sources */,
 				1D9B20C01F0673190009CAB8 /* AblyManager.swift in Sources */,
+				1DB537311F0A5E19008C026F /* PolltypeView.swift in Sources */,
 				1D9B20AD1F0673120009CAB8 /* ApiService.swift in Sources */,
 				1D9B20C61F0673190009CAB8 /* PoweredByPollTypeView.swift in Sources */,
-				1D9B20A81F0671980009CAB8 /* PolltypeCell.swift in Sources */,
 				1D9B20C31F0673190009CAB8 /* PollTypeThankyou.swift in Sources */,
 				1D9B20D21F0676460009CAB8 /* Polltype.swift in Sources */,
 				1D9B20C71F0673190009CAB8 /* ResizableButton.swift in Sources */,
@@ -299,7 +475,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DD359B01F0A5240007581E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DD359B91F0A5240007581E8 /* ViewController.swift in Sources */,
+				1DB537351F0A62DD008C026F /* PolltypeCell.swift in Sources */,
+				1DD359B71F0A5240007581E8 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1DD359BA1F0A5240007581E8 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DD359BB1F0A5240007581E8 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1DD359BF1F0A5240007581E8 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DD359C01F0A5240007581E8 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D9B20A21F066FC30009CAB8 /* Debug */ = {
@@ -412,8 +617,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Ably",
+				);
 				INFOPLIST_FILE = Polltype/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quintype.Polltype;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -434,12 +644,59 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Ably",
+				);
 				INFOPLIST_FILE = Polltype/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.quintype.Polltype;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		1DD359C41F0A5240007581E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 77740EA48744A2E2C8753C51 /* Pods-testt.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K6F4AGE4B2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/KSCrashAblyFork-framework",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SocketRocket-framework",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Ably",
+				);
+				INFOPLIST_FILE = testt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.quintype.testt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		1DD359C51F0A5240007581E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5C2BAD5DCBCB778A79B766DA /* Pods-testt.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = K6F4AGE4B2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/KSCrashAblyFork-framework",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/SocketRocket-framework",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/Ably",
+				);
+				INFOPLIST_FILE = testt/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.quintype.testt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -461,6 +718,15 @@
 			buildConfigurations = (
 				1D9B20A51F066FC30009CAB8 /* Debug */,
 				1D9B20A61F066FC30009CAB8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DD359C31F0A5240007581E8 /* Build configuration list for PBXNativeTarget "testt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DD359C41F0A5240007581E8 /* Debug */,
+				1DD359C51F0A5240007581E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

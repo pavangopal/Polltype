@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-testt.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -48,6 +53,11 @@
 			<true/>
 		</dict>
 		<key>9CC55A5763868350DF4B02E94E6D7B98</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B903E7387080F2AEE8E6FC8D37B7050A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

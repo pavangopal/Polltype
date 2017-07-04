@@ -1,8 +1,8 @@
 //
-//  PolltypeCell.swift
+//  PolltypeView.swift
 //  Polltype
 //
-//  Created by Pavan Gopal on 6/30/17.
+//  Created by Pavan Gopal on 7/3/17.
 //  Copyright © 2017 Pavan Gopal. All rights reserved.
 //
 
@@ -12,16 +12,16 @@ import Ably
 
 public protocol PolltypeCellDelegate:class {
     
-    func didClickOnVote(_ poll:Poll, opinionIndex:Int, cell:PolltypeCell)
+    func didClickOnVote(_ poll:Poll, opinionIndex:Int, view:PolltypeView)
     func didClickOnShare(_ poll:Poll)
     func didTapOnPolltype(_ poll:Poll)
-    func didClickOnLogin(_ poll:Poll, cell:PolltypeCell)
+    func didClickOnLogin(_ poll:Poll, view:PolltypeView)
     func didViewPoll(_ pollID:Int)
-
+    
 }
 
 
-open class PolltypeCell: UICollectionViewCell {
+open class PolltypeView: UIView {
     
     enum Constants:Int {
         case container_TAG = 200
@@ -38,7 +38,7 @@ open class PolltypeCell: UICollectionViewCell {
     
     fileprivate var opinionButtons:[UIButton] = []
     
-   public weak var pollDelegate:PolltypeCellDelegate?
+    public weak var pollDelegate:PolltypeCellDelegate?
     
     var questionLbl:UILabel = {
         let questionLbl = UILabel.init()
@@ -101,17 +101,20 @@ open class PolltypeCell: UICollectionViewCell {
         if _pollTypeTapGesture != nil{
             _pollTypeTapGesture?.view?.removeGestureRecognizer(_pollTypeTapGesture!)
         }
-        _pollTypeTapGesture = UITapGestureRecognizer.init(target: self, action: #selector(PolltypeCell.didTapOnPollType(_:)))
+        _pollTypeTapGesture = UITapGestureRecognizer.init(target: self, action: #selector(self.didTapOnPollType(_:)))
         return _pollTypeTapGesture!
     }
     
-    override open func awakeFromNib() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.frame = frame
+        self.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
-        super.awakeFromNib()
-        self.contentView.frame = self.bounds
-        self.contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func didTapOnPollType(_ sender:UITapGestureRecognizer){
         
@@ -119,10 +122,10 @@ open class PolltypeCell: UICollectionViewCell {
         
     }
     
-    
-  public func configure(_ storyElement:Poll?){
+    public func configure(storyElement:Poll?){
+        self.pollDelegate = Polltype.shared
         
-        if let existingActivityIndicator = self.contentView.viewWithTag(2000) as? UIActivityIndicatorView{
+        if let existingActivityIndicator = self.viewWithTag(2000) as? UIActivityIndicatorView{
             
             existingActivityIndicator.removeFromSuperview()
         }
@@ -133,10 +136,7 @@ open class PolltypeCell: UICollectionViewCell {
         }
         else{
             //handle not loaded
-            
-            
-            
-            if let container = self.contentView.viewWithTag(Constants.container_TAG.rawValue){
+            if let container = self.viewWithTag(Constants.container_TAG.rawValue){
                 
                 container.removeFromSuperview()
             }
@@ -148,13 +148,13 @@ open class PolltypeCell: UICollectionViewCell {
             activityIndicatorView.hidesWhenStopped = true
             activityIndicatorView.startAnimating()
             activityIndicatorView.activityIndicatorViewStyle = .gray
-            self.contentView.addSubview(activityIndicatorView)
+            self.addSubview(activityIndicatorView)
             
-            let centerX = NSLayoutConstraint.init(item: activityIndicatorView, attribute: .centerX, relatedBy: .equal, toItem: self.contentView, attribute: .centerX, multiplier: 1.0, constant: 0)
-            let centerY = NSLayoutConstraint.init(item: activityIndicatorView, attribute: .centerY, relatedBy: .equal, toItem: self.contentView, attribute: .centerY, multiplier: 1.0, constant: 0)
+            let centerX = NSLayoutConstraint.init(item: activityIndicatorView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0)
+            let centerY = NSLayoutConstraint.init(item: activityIndicatorView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0)
             
-            self.contentView.addConstraint(centerX)
-            self.contentView.addConstraint(centerY)
+            self.addConstraint(centerX)
+            self.addConstraint(centerY)
         }
     }
     
@@ -185,6 +185,7 @@ open class PolltypeCell: UICollectionViewCell {
         cgSize.width = cgSize.width - cardSectionInset.left - cardSectionInset.right - 20
         
         let imageSize = poll.shouldShowHeroImage() ? calculateImageSize(cgSize) : CGSize.init(width: calculateImageSize(cgSize).width, height: 0)
+        
         let heightConstraint = NSLayoutConstraint.init(item: self.imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: imageSize.height)
         
         heightConstraint.priority = 750
@@ -194,13 +195,23 @@ open class PolltypeCell: UICollectionViewCell {
         imageView.setContentCompressionResistancePriority(999, for: .vertical)
         imageView.setContentHuggingPriority(750, for: .vertical)
         
-//        if self.poll.shouldShowHeroImage(){
-//            
-////            imageView.image = #imageLiteral(resourceName: "ic_launch_screen");
-//        }
-//        else{
-//            imageView.image = nil
-//        }
+        //        let imageBaseUrl = "http://" + (Quintype.publisherConfig?.cdn_image)! + "/"
+        //        coverImageView.loadImage(url: imageBaseUrl + image + "?w=\(imageSize.width)", targetSize: CGSize(width: imageSize.width, height: imageSize.height),imageMetaData:(card?.hero_image_metadata))
+        
+        let image = UIImage(named: "polltypBG", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        
+        
+        if self.poll.shouldShowHeroImage(){
+            
+            let imageURL = "http://" + Polltype.shared.imageCDN + "/" + self.poll.heroImageS3Key! + "?W=\(imageSize.width)"
+            
+            if imageView.image == nil{
+                downloadImage(url: URL(string: imageURL)!)
+            }
+        }
+        else{
+            imageView.image = image
+        }
         
         self.imageView.contentMode = .scaleToFill
         self.imageView.backgroundColor = UIColor.white
@@ -208,12 +219,32 @@ open class PolltypeCell: UICollectionViewCell {
         self.imageView.layoutIfNeeded()
     }
     
+    func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            completion(data, response, error)
+            }.resume()
+    }
+    
+    func downloadImage(url: URL) {
+        print("Download Started")
+        getDataFromUrl(url: url) { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                self.imageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
     
     func addQuestion(){
         
-        
         self.containerView.addSubview(questionLbl)
+        
         let horizontalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[question]-(10)-|", options: [], metrics: nil, views: ["question":questionLbl])
+        
         self.containerView.addConstraints(horizontalConstraints)
         let topConstraint = NSLayoutConstraint.init(item: self.questionLbl, attribute: .top, relatedBy: .equal, toItem: self.imageView, attribute: .bottom, multiplier: 1.0, constant: 12.0)
         self.containerView.addConstraint(topConstraint)
@@ -224,9 +255,9 @@ open class PolltypeCell: UICollectionViewCell {
     }
     
     func calculateImageSize(_ targetSize:CGSize) -> CGSize{
-        
-        self.poll.heroImageMetadata = nil
-        
+        if self.poll.heroImageMetadata?.width == 0 ?? nil || self.poll.heroImageMetadata?.height == 0 ?? nil{
+            self.poll.heroImageMetadata = nil
+        }
         let widthDimension1 = CGFloat(self.poll.heroImageMetadata?.width ?? 4)
         let heightDimension1 = CGFloat(self.poll.heroImageMetadata?.height ?? 3)
         let newSize = CGSize(width:targetSize.width, height:(targetSize.width * heightDimension1) / widthDimension1)
@@ -239,22 +270,22 @@ open class PolltypeCell: UICollectionViewCell {
         
         self.containerView.addSubview(pollDescription)
         let horizontalConstraints = NSLayoutConstraint.constraints( withVisualFormat: "H:|-(10)-[description]-(10)-|", options: [], metrics: nil, views: ["description":pollDescription])
+        
         self.containerView.addConstraints(horizontalConstraints)
+        
         let topConstraint = NSLayoutConstraint.init(item: self.pollDescription, attribute: .top, relatedBy: .equal, toItem: questionLbl, attribute: .bottom, multiplier: 1.0, constant: 12)
         
         self.pollDescription.setContentCompressionResistancePriority(1000, for: .vertical)
         self.pollDescription.setContentHuggingPriority(250, for: .vertical)
         
-        
         if self.poll.pollDescription == nil || self.poll.pollDescription == ""{
-            
             
             self.pollDescription.setContentCompressionResistancePriority(250, for: .vertical)
             self.pollDescription.setContentHuggingPriority(1000, for: .vertical)
         }
-        self.containerView.addConstraint(topConstraint)
-        self.pollDescription.text = self.poll.pollDescription ?? ""
         
+        self.containerView.addConstraint(topConstraint)
+        self.pollDescription.text = self.poll.pollDescription?.html2String ?? ""
         
     }
     
@@ -273,7 +304,6 @@ open class PolltypeCell: UICollectionViewCell {
             opinionButton.translatesAutoresizingMaskIntoConstraints = false
             
             
-            
             opinionButton.tag = index
             opinionButton.titleLabel?.numberOfLines = 5
             opinionButton.titleLabel?.lineBreakMode = .byWordWrapping
@@ -282,9 +312,7 @@ open class PolltypeCell: UICollectionViewCell {
             opinionButton.setTitleColor(UIColor.black, for: .normal)
             opinionButton.backgroundColor = UIColor.init(hexColor: "#f9f9f9")
             
-            
-            
-            opinionButton.addTarget(self, action: #selector(PolltypeCell.didSelectOpinion(_:)), for: .touchUpInside)
+            opinionButton.addTarget(self, action: #selector(self.didSelectOpinion(_:)), for: .touchUpInside)
             
             
             self.containerView.addSubview(opinionButton)
@@ -516,10 +544,13 @@ open class PolltypeCell: UICollectionViewCell {
         shareButton.imageView?.contentMode = .scaleAspectFit
         shareButton.imageEdgeInsets = UIEdgeInsetsMake(10.0, -5.0, 10.0, 5.0)
         
-        shareButton.setImage(UIImage.init(named: "polltypeShare"), for: UIControlState())
+        let image = UIImage(named: "share", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        
+        
+        shareButton.setImage(image, for: UIControlState())
         shareButton.setTitle("SHARE", for: UIControlState())
         
-        shareButton.addTarget(self, action: #selector(PolltypeCell.shareButtonClick(_:)), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(self.shareButtonClick(_:)), for: .touchUpInside)
         
         let verticalConstraints = NSLayoutConstraint.constraints( withVisualFormat: "V:|-(20)-[shareButton]-(20)-|", options: [], metrics: nil, views: ["shareButton":shareButton])
         
@@ -604,7 +635,7 @@ open class PolltypeCell: UICollectionViewCell {
     
     func didClickOnLogin(){
         
-        self.pollDelegate?.didClickOnLogin(self.poll, cell: self)
+        self.pollDelegate?.didClickOnLogin(self.poll, view: self)
     }
     
     func didClickOnVote(){
@@ -618,7 +649,7 @@ open class PolltypeCell: UICollectionViewCell {
         }
         
         if let selectedOpinionButton = filteredButtons.first{
-            self.pollDelegate?.didClickOnVote(self.poll, opinionIndex: selectedOpinionButton.tag, cell: self)
+            self.pollDelegate?.didClickOnVote(self.poll, opinionIndex: selectedOpinionButton.tag, view: self)
         }
     }
     
@@ -686,16 +717,16 @@ open class PolltypeCell: UICollectionViewCell {
             self.containerView.addConstraint(centerXConstraint)
             self.voteButton.setTitle("LOGIN", for: UIControlState())
             voteButton.backgroundColor = UIColor.init(hexColor: "#0165a7")
-            self.voteButton.removeTarget(self, action: #selector(PolltypeCell.didClickOnVote), for: .touchUpInside)
-            self.voteButton.addTarget(self, action: #selector(PolltypeCell.didClickOnLogin), for: .touchUpInside)
+            self.voteButton.removeTarget(self, action: #selector(self.didClickOnVote), for: .touchUpInside)
+            self.voteButton.addTarget(self, action: #selector(self.didClickOnLogin), for: .touchUpInside)
             returnView = self.addLoginString(self.voteButton)
             break
         case false:
             let leadingConstraint = NSLayoutConstraint.init(item: voteButton, attribute: .leading, relatedBy: .greaterThanOrEqual, toItem: self.containerView, attribute: .leading, multiplier: 1.0, constant: 5.0)
             leadingConstraint.priority = 1000
             self.containerView.addConstraint(leadingConstraint)
-            self.voteButton.removeTarget(self, action: #selector(PolltypeCell.didClickOnLogin), for: .touchUpInside)
-            self.voteButton.addTarget(self, action: #selector(PolltypeCell.didClickOnVote), for: .touchUpInside)
+            self.voteButton.removeTarget(self, action: #selector(self.didClickOnLogin), for: .touchUpInside)
+            self.voteButton.addTarget(self, action: #selector(self.didClickOnVote), for: .touchUpInside)
             
             let trailingConstraint = NSLayoutConstraint.init(item: voteButton, attribute: .trailing, relatedBy: .equal, toItem: self.containerView, attribute: .trailing, multiplier: 1.0, constant: -16.0)
             self.containerView.addConstraint(trailingConstraint)
@@ -795,7 +826,7 @@ open class PolltypeCell: UICollectionViewCell {
     
     fileprivate func createContainer(){
         
-        if let container = self.contentView.viewWithTag(Constants.container_TAG.rawValue){
+        if let container = self.viewWithTag(Constants.container_TAG.rawValue){
             
             container.removeFromSuperview()
         }
@@ -804,14 +835,14 @@ open class PolltypeCell: UICollectionViewCell {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.tag = Constants.container_TAG.rawValue
         self.containerView.backgroundColor = UIColor.white
-        self.contentView.addSubview(containerView)
+        self.addSubview(containerView)
         
         let horizontalConstraints = NSLayoutConstraint.constraints( withVisualFormat: "H:|-(0)-[containerView]-(0)-|", options: [], metrics: nil, views: ["containerView":containerView])
         
         let verticalConstraints = NSLayoutConstraint.constraints( withVisualFormat: "V:|-(0)-[containerView]-(0)-|", options: [], metrics: nil, views: ["containerView":containerView])
         
-        self.contentView.addConstraints(verticalConstraints)
-        self.contentView.addConstraints(horizontalConstraints)
+        self.addConstraints(verticalConstraints)
+        self.addConstraints(horizontalConstraints)
         
     }
     
@@ -830,36 +861,28 @@ open class PolltypeCell: UICollectionViewCell {
         if self.containerView != nil{
             self.containerView.layoutIfNeeded()
         }
-        self.contentView.layoutIfNeeded()
+        self.layoutIfNeeded()
     }
     
     
     open  func preferredLayoutSizeFittingSize(_ targetSized:CGSize) -> CGSize{
         
         let targetSize = targetSized
-        if self.poll == nil{
-            let height = UIScreen.main.bounds.height
-            return CGSize.init(width: targetSize.width, height: height/2)
-        }
         
-        if self.poll.opinions.count == 0{
-            return CGSize.init(width: targetSize.width, height: 0)
-        }
-        
-        let widthConstraint = NSLayoutConstraint.init(item: self.contentView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: targetSize.width)
+        let widthConstraint = NSLayoutConstraint.init(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: targetSize.width)
         
         widthConstraint.priority = 999
         
-        self.contentView.addConstraint(widthConstraint)
-        self.contentView.setNeedsUpdateConstraints()
-        self.contentView.updateConstraintsIfNeeded()
-        self.contentView.setNeedsLayout()
-        self.contentView.layoutIfNeeded()
+        self.addConstraint(widthConstraint)
+        self.setNeedsUpdateConstraints()
+        self.updateConstraintsIfNeeded()
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
         var changeSize = UILayoutFittingCompressedSize
         changeSize.width = targetSize.width
-        let size = self.contentView.systemLayoutSizeFitting(changeSize, withHorizontalFittingPriority: 1000, verticalFittingPriority: 250)
+        let size = self.systemLayoutSizeFitting(changeSize, withHorizontalFittingPriority: 1000, verticalFittingPriority: 250)
         
-        self.contentView.removeConstraint(widthConstraint)
+        self.removeConstraint(widthConstraint)
         
         self.setNeedsLayout()
         self.layoutIfNeeded()
@@ -868,3 +891,22 @@ open class PolltypeCell: UICollectionViewCell {
     }
 }
 
+extension String {
+    
+    var html2AttributedString: NSAttributedString? {
+        guard
+            let data = data(using: String.Encoding.utf8)
+            else { return nil }
+        do {
+            return try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType,NSCharacterEncodingDocumentAttribute:NSNumber(value: String.Encoding.utf8.rawValue)], documentAttributes: nil)
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+            return  nil
+        }
+    }
+    
+    var html2String: String {
+        return html2AttributedString?.string ?? ""
+    }
+}
