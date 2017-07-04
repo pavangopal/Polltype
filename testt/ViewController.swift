@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
+    
+    
     var reuseId:[String] = []
     var models:[Int] = []
     var pollIdIndexPathMapping:[Int:IndexPath] = [:]
