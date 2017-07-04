@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     var reuseId:[String] = []
     var models:[Int] = []
     var pollIdIndexPathMapping:[Int:IndexPath] = [:]
-    var cachedHeight:[Int:CGSize] = [:]
+    var cachedHeight:[Int:CGSize] = [:] 
     
     var sizingCell :PolltypeCell?
     
