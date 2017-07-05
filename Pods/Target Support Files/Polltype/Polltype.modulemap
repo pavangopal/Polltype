@@ -1,0 +1,6 @@
+framework module Polltype {
+  umbrella header "Polltype-umbrella.h"
+
+  export *
+  module * { export * }
+}

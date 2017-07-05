@@ -1,0 +1,34 @@
+{
+  "name": "Polltype",
+  "version": "0.0.2",
+  "summary": "A short description of Polltype PolltypePolltypePolltypevvvvv PolltypevvvPolltype vvPolltypePolltypePolltype.......................................................",
+  "description": "A short description of Polltype.......................................................",
+  "homepage": "https://github.com/pavangopal/Polltype",
+  "license": {
+    "type": "MIT",
+    "file": "FILE_LICENSE"
+  },
+  "authors": {
+    "pavangopal": "pavangopal39@gmail.com"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source": {
+    "git": "https://github.com/pavangopal/Polltype.git",
+    "tag": "0.0.2"
+  },
+  "source_files": [
+    "Polltype",
+    "Polltype/**/*.{h,m,swift,xib}"
+  ],
+  "public_header_files": "Polltype/**/*.h",
+  "resources": "Polltype/*.xcassets",
+  "frameworks": "UIKit",
+  "requires_arc": true,
+  "dependencies": {
+    "Ably": [
+      "~> 1.0"
+    ]
+  }
+}
