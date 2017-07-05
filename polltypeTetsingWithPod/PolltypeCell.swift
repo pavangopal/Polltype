@@ -12,7 +12,7 @@ import Polltype
 public protocol PolltypeCellDelegate{
     
     func pollData(poll:Poll)
-}
+} 
 
 class PolltypeCell: UICollectionViewCell {
     
