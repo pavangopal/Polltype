@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Polltype", "Polltype/**/*.{h,m,swift}"
+  s.source_files  = "Polltype", "Polltype/**/*.{h,m,swift,xib,xcassets}"
   # s.exclude_files = "Polltype/testt/**/*.{h,m,swift}"
 
   s.public_header_files = "Polltype/**/*.h"
