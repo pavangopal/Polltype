@@ -14,8 +14,8 @@ class PoweredByPollTypeView:UIView{
     
     @IBOutlet weak var logoImageView:UIImageView!
     class func instantiateFromNib() -> PoweredByPollTypeView{
-    
-        return UINib.init(nibName: "PoweredByPollType", bundle: Bundle(identifier: "com.quintype.Polltype")).instantiate(withOwner: nil, options: nil)[0] as! PoweredByPollTypeView
+        
+        return UINib.init(nibName: "PoweredByPollType", bundle: Bundle(identifier: "org.cocoapods.Polltype")).instantiate(withOwner: nil, options: nil)[0] as! PoweredByPollTypeView
     }
-
+    
 }

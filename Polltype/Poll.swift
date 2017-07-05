@@ -12,7 +12,7 @@ public class Poll:NSObject{
     
     public struct Constants{
         
-        static var polltypeHost:NSURL = NSURL.init(string: "https://www.polltype.com/")!
+        static var polltypeHost:URL = URL.init(string: "https://www.polltype.com/")!
     }
     
     public var hasAccount:Bool = false

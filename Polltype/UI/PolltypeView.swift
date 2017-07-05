@@ -107,7 +107,7 @@ public class PolltypeView: UIView {
     
     func didTapOnPollType(_ sender:UITapGestureRecognizer){
         
-        self.pollDelegate?.didTapOnPolltype(poll)
+        self.pollDelegate?.didTapOnPolltype(poll,view: self)
         
     }
     
@@ -516,7 +516,7 @@ public class PolltypeView: UIView {
         
         
         if self.poll != nil{
-            self.pollDelegate?.didClickOnShare(self.poll)
+            self.pollDelegate?.didClickOnShare(self.poll,view: sender)
         }
     }
     

@@ -20,7 +20,7 @@ open class Polltype : NSObject{
     
     fileprivate var _api:APIManager?
     
-    public var parentView:UIView?
+    public var parentViewController:UIViewController?
     
     var polls:[Int:Poll] = [:]
     
@@ -39,6 +39,7 @@ open class Polltype : NSObject{
     
     var hostURl : String!
     var imageCDN : String!
+    var storyUrl : String!
     
     var ablyToken:String?
     
@@ -48,6 +49,7 @@ open class Polltype : NSObject{
     var pollIndexPathMapping:[Int:IndexPath] = [:]
     typealias LOGIN_COMPLETION = () -> ()
     var loginCompletion:LOGIN_COMPLETION?
+    
     
     var _loginWebView:UIWebView?
     
@@ -81,10 +83,12 @@ open class Polltype : NSObject{
     
     private override init(){}
     
-    public func configure(withHostUrl url:String,imageCDN:String){
+    public func configure(withHostUrl url:String,imageCDN:String,storyUrl:String){
         
         self.hostURl = url
         self.imageCDN = imageCDN
+        self.storyUrl = storyUrl
+        
         Polltype.shared.generateAblyToken()
         
     }
@@ -106,7 +110,7 @@ open class Polltype : NSObject{
                 }
                 else{
                     DispatchQueue.main.async {
-                        if self.pollChannel == nil && self.ablyToken != nil{
+                        if self.ablyToken != nil{
                             
                             self.pollChannel = self.ablyManager.client.channels.get("polltype-clients:results-\(id)")
                             self.watchPollChange(channel: self.pollChannel)
@@ -228,6 +232,71 @@ open class Polltype : NSObject{
     }
 }
 
+
+extension Polltype:UIWebViewDelegate{
+    
+    public func showWebView(_ cell: PolltypeView?,withUrlRequest:URLRequest?){
+        loginWebView!.removeFromSuperview()
+        self.parentViewController?.view?.addSubview(self.loginWebView!)
+        self.parentViewController?.view?.bringSubview(toFront: self.loginWebView!)
+        self.loginWebView?.delegate = self
+        
+        loginWebView?.topAnchor.constraint(equalTo: (self.parentViewController?.view?.topAnchor)!).isActive = true
+        loginWebView?.bottomAnchor.constraint(equalTo: (self.parentViewController?.view?.bottomAnchor)!).isActive = true
+        loginWebView?.leadingAnchor.constraint(equalTo: (self.parentViewController?.view?.leadingAnchor)!).isActive = true
+        loginWebView?.trailingAnchor.constraint(equalTo: (self.parentViewController?.view?.trailingAnchor)!, constant: 0).isActive = true
+        
+        let closeButton = UIButton.init(type: .custom)
+        closeButton.tag = 20
+        closeButton.backgroundColor = UIColor.darkGray
+        closeButton.setTitle("X", for: UIControlState())
+        closeButton.setTitleColor(UIColor.lightText, for: .normal)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.addTarget(self, action: #selector(self.closeWebview(_:)), for: .touchUpInside)
+        self.loginWebView?.addSubview(closeButton)
+        self.loginWebView?.bringSubview(toFront: closeButton)
+        closeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        closeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        closeButton.trailingAnchor.constraint(equalTo: (self.parentViewController?.view?.trailingAnchor)!, constant: -20).isActive = true
+        closeButton.topAnchor.constraint(equalTo: (self.loginWebView?.topAnchor)!, constant: 20).isActive = true
+        
+        self.loginWebView?.loadRequest(withUrlRequest!)
+    }
+    
+    func closeWebview(_ sender:UIWebView){
+        
+        self.loginWebView?.removeFromSuperview()
+        self.loginWebView?.delegate = nil
+        self.loginWebView = nil
+    }
+    
+    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        
+        return true
+    }
+    
+    public func webViewDidFinishLoad(_ webView: UIWebView) {
+        
+        guard let url = webView.request?.url?.absoluteString.components(separatedBy: "/")else {return}
+        
+        url.forEach({ (data) in
+            print(data)
+            if (data == "me#_=_") || (data ==  "me"){
+                
+                print("LoggedIn")
+                
+                if let someCompletion = loginCompletion{
+                    someCompletion()
+                }
+            }
+            
+        })
+    }
+    
+}
+
+
 extension Polltype:PolltypeCellDelegate{
     
     
@@ -237,17 +306,63 @@ extension Polltype:PolltypeCellDelegate{
     
     public func didViewPoll(_ pollID: Int) {
         
+        api.voteViews(pollID)
     }
     
     public func didClickOnLogin(_ poll: Poll, view: PolltypeView) {
         
+        DispatchQueue.main.async(execute: {
+            self.showWebView(view, withUrlRequest: URLRequest.init(url: URL.init(string: APIManager.BASEURL + "login")!))
+        })
+        
+        self.loginCompletion = {
+            self.closeWebview(self.loginWebView!)
+            let tempPoll = poll
+            tempPoll.hasAccount = true
+            
+            self.updatePOll(polld: poll)
+            
+        }
     }
     
-    public func didTapOnPolltype(_ poll:Poll){
+    public func didTapOnPolltype(_ poll:Poll,view: PolltypeView){
+        
+        DispatchQueue.main.async(execute: {
+            self.showWebView(view, withUrlRequest: URLRequest.init(url: URL.init(string: poll.polltypeURL) ?? Poll.Constants.polltypeHost))
+        })
+        
         
     }
     
-    public func didClickOnShare(_ poll: Poll) {
+    public func didClickOnShare(_ poll: Poll,view:UIButton) {
+        
+        let firstActivityItem : URL = URL(string: storyUrl)!
+        
+        let activityViewController : UIActivityViewController = UIActivityViewController(
+            activityItems: [firstActivityItem], applicationActivities: nil)
+        
+        // This lines is for the popover you need to show in iPad
+        activityViewController.popoverPresentationController?.sourceView = view
+        
+        // This line remove the arrow of the popover to show in iPad
+        activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.unknown
+        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+        
+        // Anything you want to exclude
+        activityViewController.excludedActivityTypes = [
+            UIActivityType.postToWeibo,
+            UIActivityType.print,
+            UIActivityType.assignToContact,
+            UIActivityType.saveToCameraRoll,
+            UIActivityType.addToReadingList,
+            UIActivityType.postToFlickr,
+            UIActivityType.postToVimeo,
+            UIActivityType.postToTencentWeibo,
+            UIActivityType.airDrop,
+            UIActivityType.copyToPasteboard
+        ]
+        
+        self.parentViewController?.present(activityViewController, animated: true, completion: nil)
         
     }
     
@@ -261,8 +376,10 @@ extension Polltype:PolltypeCellDelegate{
             self.vote(poll, opinionIndex: opinionIndex, cell: view)
         }
         else{
+            
             DispatchQueue.main.async(execute: {
-                self.showWebView(view)
+                self.showWebView(view, withUrlRequest: URLRequest.init(url: URL.init(string: APIManager.BASEURL + "login")!))
+                
             })
             
             self.loginCompletion = {
@@ -292,69 +409,14 @@ extension Polltype:PolltypeCellDelegate{
         }
     }
     
-}
-
-extension Polltype:UIWebViewDelegate{
-    
-    public func showWebView(_ cell: PolltypeView?){
-        loginWebView!.removeFromSuperview()
-        self.parentView?.addSubview(self.loginWebView!)
-        self.parentView?.bringSubview(toFront: self.loginWebView!)
-        self.loginWebView?.delegate = self
+    func updatePOll(polld:Poll?){
+        self.polls[(polld?.id)!] = polld
         
+        self.polls[(polld?.id)!]?.hasAccount = polld?.hasAccount ?? false
         
-        loginWebView?.topAnchor.constraint(equalTo: (self.parentView?.topAnchor)!).isActive = true
-        loginWebView?.bottomAnchor.constraint(equalTo: (self.parentView?.bottomAnchor)!).isActive = true
-        loginWebView?.leadingAnchor.constraint(equalTo: (self.parentView?.leadingAnchor)!).isActive = true
-        loginWebView?.trailingAnchor.constraint(equalTo: (self.parentView?.trailingAnchor)!, constant: 0).isActive = true
-        
-        let closeButton = UIButton.init(type: .custom)
-        closeButton.tag = 20
-        closeButton.backgroundColor = UIColor.darkGray
-        closeButton.setTitle("X", for: UIControlState())
-        closeButton.setTitleColor(UIColor.lightText, for: .normal)
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
-        closeButton.addTarget(self, action: #selector(self.closeWebview(_:)), for: .touchUpInside)
-        self.loginWebView?.addSubview(closeButton)
-        self.loginWebView?.bringSubview(toFront: closeButton)
-        closeButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        closeButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        closeButton.trailingAnchor.constraint(equalTo: (self.parentView?.trailingAnchor)!, constant: -20).isActive = true
-        closeButton.topAnchor.constraint(equalTo: (self.loginWebView?.topAnchor)!, constant: 20).isActive = true
-        
-        self.loginWebView?.loadRequest(URLRequest.init(url: URL.init(string: APIManager.BASEURL + "login")!))
-    }
-    
-    func closeWebview(_ sender:UIWebView){
-        
-        self.loginWebView?.removeFromSuperview()
-        self.loginWebView?.delegate = nil
-        self.loginWebView = nil
-    }
-    
-    public func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        
-        
-        return true
-    }
-    
-    public func webViewDidFinishLoad(_ webView: UIWebView) {
-        
-        guard let url = webView.request?.url?.absoluteString.components(separatedBy: "/")else {return}
-        
-        url.forEach({ (data) in
-            print(data)
-            if (data == "me#_=_") || (data ==  "me"){
-                
-                print("LoggedIn")
-                
-                if let someCompletion = loginCompletion{
-                    someCompletion()
-                }
-            }
-            
-        })
+        DispatchQueue.main.async {
+            self.PollTypeDelegate?.shouldReloadUIForPollId(pollId: (polld?.id)!,updatedPoll: polld)
+        }
     }
     
 }

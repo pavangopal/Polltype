@@ -14,7 +14,7 @@ class PollTypeThankyou:UIView{
     
     class func instantiateFromNib() -> PollTypeThankyou{
         
-        let bundleId = Bundle(identifier: "com.quintype.Polltype")
+        let bundleId = Bundle(identifier: "org.cocoapods.Polltype")
         return UINib.init(nibName: "PollTypeThankyou", bundle: bundleId).instantiate(withOwner: nil, options: nil)[0] as! PollTypeThankyou
     }
     
