@@ -104,7 +104,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
+  s.resources = "Polltype/Media.xcassets/**/*.png"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
