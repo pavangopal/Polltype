@@ -20,7 +20,6 @@
 		1D9B20C61F0673190009CAB8 /* PoweredByPollTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20B71F0673190009CAB8 /* PoweredByPollTypeView.swift */; };
 		1D9B20C71F0673190009CAB8 /* ResizableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20B81F0673190009CAB8 /* ResizableButton.swift */; };
 		1D9B20CB1F0673190009CAB8 /* UIColor + Hex8bitColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20BC1F0673190009CAB8 /* UIColor + Hex8bitColor.swift */; };
-		1D9B20CE1F0673190009CAB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20BF1F0673190009CAB8 /* ViewController.swift */; };
 		1D9B20D01F06731F0009CAB8 /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20CF1F06731F0009CAB8 /* Poll.swift */; };
 		1D9B20D21F0676460009CAB8 /* Polltype.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9B20D11F0676460009CAB8 /* Polltype.swift */; };
 		1DA4744A1F0CB1C200D85F56 /* PolltypeCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA474491F0CB1C200D85F56 /* PolltypeCellDelegate.swift */; };
@@ -50,7 +49,6 @@
 		1D9B20B71F0673190009CAB8 /* PoweredByPollTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PoweredByPollTypeView.swift; sourceTree = "<group>"; };
 		1D9B20B81F0673190009CAB8 /* ResizableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableButton.swift; sourceTree = "<group>"; };
 		1D9B20BC1F0673190009CAB8 /* UIColor + Hex8bitColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor + Hex8bitColor.swift"; sourceTree = "<group>"; };
-		1D9B20BF1F0673190009CAB8 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1D9B20CF1F06731F0009CAB8 /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Poll.swift; path = ../Poll.swift; sourceTree = "<group>"; };
 		1D9B20D11F0676460009CAB8 /* Polltype.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Polltype.swift; sourceTree = "<group>"; };
 		1DA474491F0CB1C200D85F56 /* PolltypeCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PolltypeCellDelegate.swift; sourceTree = "<group>"; };
@@ -153,7 +151,6 @@
 		1D9B20B01F0673190009CAB8 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1D9B20BF1F0673190009CAB8 /* ViewController.swift */,
 				1D9B20B41F0673190009CAB8 /* PollTypeThankyou.swift */,
 				1D9B20B51F0673190009CAB8 /* PollTypeThankyou.xib */,
 				1D9B20B61F0673190009CAB8 /* PoweredByPollType.xib */,
@@ -326,7 +323,6 @@
 				1DA4744A1F0CB1C200D85F56 /* PolltypeCellDelegate.swift in Sources */,
 				1D9B20AE1F0673120009CAB8 /* Constants.swift in Sources */,
 				1D9B20C21F0673190009CAB8 /* APIManager.swift in Sources */,
-				1D9B20CE1F0673190009CAB8 /* ViewController.swift in Sources */,
 				1D9B20CB1F0673190009CAB8 /* UIColor + Hex8bitColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

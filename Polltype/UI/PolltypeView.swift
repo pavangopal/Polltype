@@ -184,22 +184,18 @@ public class PolltypeView: UIView {
         imageView.setContentCompressionResistancePriority(999, for: .vertical)
         imageView.setContentHuggingPriority(750, for: .vertical)
         
-        //        let imageBaseUrl = "http://" + (Quintype.publisherConfig?.cdn_image)! + "/"
-        //        coverImageView.loadImage(url: imageBaseUrl + image + "?w=\(imageSize.width)", targetSize: CGSize(width: imageSize.width, height: imageSize.height),imageMetaData:(card?.hero_image_metadata))
-        
-        let image = UIImage(named: "polltypBG", in: Bundle(for: type(of: self)), compatibleWith: nil)
-        
+        _ = UIImage(named: "polltypBG", in: Bundle(for: type(of: self)), compatibleWith: nil)
         
         if self.poll.shouldShowHeroImage(){
             
-            let imageURL = "http://" + Polltype.shared.imageCDN + "/" + self.poll.heroImageS3Key! + "?W=\(imageSize.width)"
+            let imageURL = "http://" + Polltype.shared.imageCDN + "/" + self.poll.heroImageS3Key! + "?W=\(imageSize.width)&h=\(imageSize.height)"
             
             if imageView.image == nil{
                 downloadImage(url: URL(string: imageURL)!)
             }
         }
         else{
-            imageView.image = image
+            imageView.image = nil
         }
         
         self.imageView.contentMode = .scaleToFill
