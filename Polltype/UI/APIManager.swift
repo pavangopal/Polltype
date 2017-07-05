@@ -26,6 +26,7 @@ class PolltypeSessionManager:NSObject{
     }
     
     
+    
 }
 
 class APIManager: NSObject {
