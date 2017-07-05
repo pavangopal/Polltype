@@ -63,7 +63,7 @@ Pod::Spec.new do |s|
   #
 
   s.platform     = :ios
-  # s.platform     = :ios, "5.0"
+  s.platform     = :ios, "10.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "Polltype", "Polltype/**/*.{h,m}"
-  s.exclude_files = "Polltype/Exclude"
+  s.exclude_files = "Polltype/testt/**/*.{h,m,swift}"
 
   # s.public_header_files = "Classes/**/*.h"
 
@@ -132,6 +132,6 @@ Pod::Spec.new do |s|
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   s.dependency "Ably", '~> 1.0'
-   
+
 
 end
