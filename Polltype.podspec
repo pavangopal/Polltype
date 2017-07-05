@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "Polltype", "Polltype/**/*.{h,m,swift,xib}"
+  s.source_files  = "Polltype", "Polltype/**/*.{h,m,swift,xib,plist}"
   # s.exclude_files = "Polltype/testt/**/*.{h,m,swift}"
 
   s.public_header_files = "Polltype/**/*.h"
@@ -104,7 +104,7 @@ Pod::Spec.new do |s|
   #
 
   # s.resource  = "icon.png"
-  s.resources = "Polltype/**/*"
+  s.resources = "Polltype/Media/**/*"
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
