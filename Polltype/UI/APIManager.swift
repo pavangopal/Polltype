@@ -11,7 +11,7 @@ import UIKit
 
 
 public class PolltypeSessionManager:NSObject{
-
+    
     static let sharedSession:PolltypeSessionManager = PolltypeSessionManager.init()
     
     var session:URLSession
@@ -37,7 +37,7 @@ public class APIManager: NSObject {
     }
     
     
-     var publisherBaseURL:String{
+    var publisherBaseURL:String{
         
         var baseURL = Polltype.shared.hostURl!
         
@@ -59,7 +59,7 @@ public class APIManager: NSObject {
             return baseURL
         }
     }
-     
+    
     
     fileprivate var pendingPolls:Array<Int> = []
     
@@ -132,9 +132,10 @@ public class APIManager: NSObject {
     
     internal func fetchPoll(_ pollID:Int, completion:@escaping (_ poll:Poll?, _ error:Error?) -> Void){
         
-        if isFetchingPoll(pollID) || isFetchedPoll(pollID){
-            return
-        }
+        //        if isFetchingPoll(pollID) || isFetchedPoll(pollID){
+        //            return
+        //        }
+        
         self.pendingPolls.append(pollID)
         
         PolltypeSessionManager.sharedSession.session.dataTask(with: URL.init(string: APIManager.BASEURL + "api/polls/" + "\(pollID)")!) { (data, response, error) in
@@ -158,7 +159,7 @@ public class APIManager: NSObject {
                 do{
                     
                     let parsedObject = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
-                   
+                    
                     self.startParse(parsedObject, completion: { (poll, error) in
                         
                         if poll?.id == nil{
@@ -185,7 +186,7 @@ public class APIManager: NSObject {
                     completion(nil, error)
                 }
             }
-        }.resume()
+            }.resume()
         
         
     }
@@ -202,15 +203,15 @@ public class APIManager: NSObject {
             parameters["url"] = storyURLPresent.absoluteString as AnyObject?
         }
         mutableURLRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-  //      mutableURLRequest.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options:[])
+        //      mutableURLRequest.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options:[])
         mutableURLRequest.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
         
-       // NSURLSession.sharedSession().dataTask(with: mutableURLRequest as URLRequest) { (data, response, error) in
-     //  PolltypeSessionManager.sharedSession.session.dataTaskWithRequest(mutableURLRequest) { (data, response, error) in
-            URLSession.shared.dataTask(with: mutableURLRequest as URLRequest) { (data, response, error) in
-                
-        
-        
+        // NSURLSession.sharedSession().dataTask(with: mutableURLRequest as URLRequest) { (data, response, error) in
+        //  PolltypeSessionManager.sharedSession.session.dataTaskWithRequest(mutableURLRequest) { (data, response, error) in
+        URLSession.shared.dataTask(with: mutableURLRequest as URLRequest) { (data, response, error) in
+            
+            
+            
             if let someError = error{
                 completion(nil, someError)
             }
@@ -233,7 +234,7 @@ public class APIManager: NSObject {
                 }
                 
             }
-        }.resume()
+            }.resume()
     }
     
     func parsePollTypeResult(_ poll:Poll,dictionary:[String: AnyObject], completion:(Poll) -> Void){
@@ -271,7 +272,7 @@ public class APIManager: NSObject {
                 }
                 
                 poll.opinions = opinionArray
-               
+                
                 
             }
             if let votedOnDict = resultsStructure["voted-on"] as? [String:AnyObject]{
@@ -302,7 +303,7 @@ public class APIManager: NSObject {
                 
                 poll.votedOnModel = votedOn
             }
-             completion(poll)
+            completion(poll)
             
         }
     }
@@ -323,11 +324,11 @@ public class APIManager: NSObject {
                 }
                 
             } catch let jsonError {
-               print(jsonError.localizedDescription)
+                print(jsonError.localizedDescription)
             }
-
             
-        }.resume()
+            
+            }.resume()
     }
     
     internal func voteIntend(_ pollID:Int,opinionID:Int,completion:((_ status:Int?, _ error:Error?, _ jsonData:[String:AnyObject]?) -> Void)? = nil){
@@ -338,9 +339,9 @@ public class APIManager: NSObject {
         url.httpMethod = "POST"
         let parameters = ["intention":["opinion-id":opinionID]]
         
-            url.addValue("application/json", forHTTPHeaderField: "Content-Type")
-            url.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options:[])
-            
+        url.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        url.httpBody = try! JSONSerialization.data(withJSONObject: parameters, options:[])
+        
         URLSession.shared.dataTask(with: url as URLRequest) { (data, response, error) in
             
             if error != nil {
@@ -354,19 +355,19 @@ public class APIManager: NSObject {
                 if let unwrappedData = data {
                     
                     let jsonDictionaries = try JSONSerialization.jsonObject( with: unwrappedData, options: .allowFragments) as? [String: AnyObject]
-      
+                    
                     DispatchQueue.main.async {
                         print(jsonDictionaries ?? "")
                         
                         if let someCompletion = completion{
                             someCompletion((response as? HTTPURLResponse)?.statusCode, nil, jsonDictionaries)
                         }
-                        }
+                    }
                 }
                 
             } catch let jsonError {
                 if let someCompletion = completion{
-                 
+                    
                     someCompletion((response as? HTTPURLResponse)?.statusCode, jsonError, nil)
                 }
             }
@@ -375,7 +376,7 @@ public class APIManager: NSObject {
         
     }
     
- 
+    
     
     
     
@@ -444,7 +445,7 @@ public class APIManager: NSObject {
                             pollModel.showResult = Poll.ShowResults.loggedInVoted
                         }
                         
-    
+                        
                     }
                     
                     if let anonymousVotingEnabled = settings["anonymous-voting?"] as? NSNumber{
@@ -455,7 +456,7 @@ public class APIManager: NSObject {
                         pollModel.showDefaultHeroImage = showDefaultHeroImage.boolValue
                     }
                     
-                 }
+                }
                 
                 if let opinions = poll["opinions"] as? [[String:AnyObject]]{
                     
@@ -509,7 +510,7 @@ public class APIManager: NSObject {
                                 metadataImage.focus_point = focusPointArray as [NSNumber]?
                             }
                             
-                           
+                            
                             
                             pollModel.heroImageMetadata = metadataImage
                         }
